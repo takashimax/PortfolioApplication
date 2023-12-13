@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.entity.Food;
+import com.example.demo.entity.User;
 
 @RequestMapping
 public interface FoodMapper {
 
-	public List<Food> selectAll();
+	public List<User> selectAll();
 }
