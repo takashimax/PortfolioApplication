@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="
+http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
-	<title>食材の下処理</title>
+	<title>ログインページ</title>
+	<link rel="stylesheet" href="css/starter-template.css" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+
 </head>
 
-<body>
-	<header>
-		<h2>タイトル</h2>
-		<nav>
-			<ul>
-				<li><a th:href="@{/login}">ログイン</a></li>
-				<li><a th:href="@{/signup}">会員登録</a></li>
-			</ul>
-		</nav>
-	</header>
-	<div>
-		<ul>
-			<li>
-				<label><a th:href="@{/food/item}">野菜</a></label>
-			</li>
-			<li>
-				<label><a href="">野菜</a></label>
-			</li>
-			<li>
-				<label><a href="">野菜</a></label>
-			</li>
-		</ul>
-	</div>
-	<div>
-		<label><a th:href="@{/post}">レシピを投稿</a></label>
+<body class="mx-4">
+	<h1 class="mt-3">ログイン画面</h1>
+	<form action="#" th:action="@{/login}" method="post">
+		<div th:if="${param.error}" class="alert alert-danger" role="alert">
+			ユーザー名もしくはパスワードが間違っています
+		</div>
+		<div class="mt-3">
+			<label for="usernameInput" class="form-label">ユーザー名</label>
+			<input type="text" id="usernameInput" name="username" required class="form-control">
+		</div>
+		<div class="mt-3">
+			<label for="passwordInput" class="form-label">パスワード</label>
+			<input type="password" id="passwordInput" name="password" required class="form-control">
+		</div>
+		<div class="mt-3">
+			<button type="submit" class="btn btn-primary">ログイン</button>
+		</div>
+	</form>
+	<table>
+		<tr th:each="clientRegistration : ${@clientRegistrationRepository}">
+			<td><a class="btn btn-primary btn-block"
+					th:href="@{/oauth2/authorization/{id}(id=${clientRegistration.registrationId})}"
+					th:text="|Sign in with ${clientRegistration.clientName}|">Sign in with GitHub</a></td>
+		</tr>
+	</table>
+
+	<div class="mt-3">
+		<a href="../creationForm.html" class="mt-3" th:href="@{/signup}">新規登録はこちら</a>
 	</div>
 </body>
 
